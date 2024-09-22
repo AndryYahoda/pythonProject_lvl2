@@ -24,6 +24,6 @@ print("Це перевернутий текст:", reversed_text)
 
 
 if text_without_spaces == reversed_text:
-    print('Це паліндром')
+    print("Це паліндром")
 else:
-    print('Це не паліндром')
+    print("Це не паліндром")
