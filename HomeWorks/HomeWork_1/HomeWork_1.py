@@ -11,3 +11,4 @@ if text_without_spaces == text_without_spaces[::-1]:
     print("Це паліндром")
 else:
     print("Це не паліндром")
+
