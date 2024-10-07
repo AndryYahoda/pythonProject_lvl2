@@ -1,19 +1,25 @@
 import random
 
+
+def count_even_odd(list1, list2):
+
+    even_list = [num for num in list1 if num % 2 == 0]
+    odd_list = [num for num in list2 if num % 2 != 0]
+    result = [len(even_list), len(odd_list)]
+    return result
+
+
 random_list1 = [random.randint(1, 100) for _ in range(10)]
 random_list2 = [random.randint(1, 100) for _ in range(10)]
-
-
-def lists_compare(list1, list2):
-    even_count_list1 = sum(1 for num in list1 if num % 2 == 0)
-
-    odd_count_list2 = sum(1 for num in list2 if num % 2 != 0)
-
-    return even_count_list1 > odd_count_list2
-
 
 print("Перший список:", random_list1)
 print("Другий список:", random_list2)
 
-result = lists_compare(random_list1, random_list2)
-print("Результат:", result)
+result = count_even_odd(random_list1, random_list2)
+
+if result[0] == result[1]:
+    print("Результат: Equal")
+else:
+    print("Результат: ", result[0] > result[1])
+
+

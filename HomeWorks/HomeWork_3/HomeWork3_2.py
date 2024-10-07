@@ -1,11 +1,15 @@
-import random
-
-random_list = [random.randint(1, 100) for _ in range(10)]
-
-
 def three_largest_elements(lst):
-    print('Три максимальних числа зі списку: ', sorted(lst, reverse=True)[:3])
+    unique_lst = list(set(lst))
+    sorted_lst = sorted(unique_lst, reverse=True)[:3]
+    return sorted_lst
 
 
-print("Список:", random_list)
-three_largest_elements(random_list)
+lst = [1, 10, 4, 13, 22, 10, 0, 105, 12, 11, 105]
+print("Список:", lst)
+
+max_1, max_2, max_3 = three_largest_elements(lst)
+print('max_1 =', max_1)
+print('max_2 =', max_2)
+print('max_3 =', max_3)
+
+
