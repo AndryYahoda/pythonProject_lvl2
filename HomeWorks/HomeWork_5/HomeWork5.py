@@ -1,14 +1,16 @@
 def recursive_gcd(a, b):
     if a == 0 or b == 0:
-        return max(a, b)
+        return [a, b]
     elif a >= 2 * b:
-        return recursive_gcd(a - 2 * b, b)
+        a = a - 2 * b
+        return recursive_gcd(a, b)
     elif b >= 2 * a:
-        return recursive_gcd(a, b - 2 * a)
+        b = b - 2*a
+        return recursive_gcd(a, b)
     else:
-        return recursive_gcd(a - b, b) if a > b else recursive_gcd(a, b - a)
+        return [a, b]
 
 
-a = 56
-b = 16
-print("Найбільший спільний дільник:", recursive_gcd(a, b))
+a = 50
+b = 125
+print(recursive_gcd(a, b))
