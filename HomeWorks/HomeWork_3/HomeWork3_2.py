@@ -1,4 +1,4 @@
-def three_largest_elements(lst: list):
+def three_largest_elements(lst: list) -> list:
     """
     Функція для знаходження трьох найбільших унікальних елементів у списку.
     :param lst: Список чисел.

@@ -3,7 +3,7 @@ import random
 random_list = [random.randint(1, 100) for _ in range(10)]
 
 
-def largest_even_element(lst: list):
+def largest_even_element(lst: list) -> list:
     """
      Функція для знаходження найбільшого парного елемента у списку.
     :param lst: Список цілих чисел.
