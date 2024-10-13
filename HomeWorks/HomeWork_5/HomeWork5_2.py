@@ -1,4 +1,4 @@
-def recursive_gcd(a, b):
+def recursive_gcd(a, b: int) -> list:
     """
     Функція для рекурсивного знаходження спільного дільника двох чисел
     :param a: Перше ціле число.

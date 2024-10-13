@@ -1,7 +1,7 @@
 import random
 
 
-def count_even_odd(list1, list2):
+def count_even_odd(list1, list2: int) -> list:
     """
     Функція для підрахунку кількості парних чисел у першому списку та непарних чисел у другому списку.
     :param list1: Перший список цілих чисел.
