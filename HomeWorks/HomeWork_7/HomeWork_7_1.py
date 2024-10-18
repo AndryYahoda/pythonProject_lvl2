@@ -1,4 +1,9 @@
-def count_characters(filename):
+def count_characters(filename: str) -> dict:
+    """
+    Підраховує кількість літер, цифр, пробілів та інших символів у файлі.
+    :param filename: Ім'я або шлях до файлу, який потрібно обробити.
+    :return: Словник, що містить підрахунки літер, цифр, пробілів та інших символів.
+    """
     counts = {
         'letters': 0,
         'digits': 0,
