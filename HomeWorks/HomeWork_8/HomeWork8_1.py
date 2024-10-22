@@ -19,4 +19,3 @@ def count_words_by_case(file: str) -> dict:
 result = count_words_by_case('input_1.txt')
 print(result)
 
- a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a aa a a a a a a a aa a a a a a a a a a a a a a a a a a a
