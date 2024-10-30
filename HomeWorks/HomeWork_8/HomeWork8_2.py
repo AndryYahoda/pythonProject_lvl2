@@ -1,3 +1,4 @@
+import re
 from collections import Counter
 
 
@@ -7,8 +8,8 @@ def find_most_common_shortest_word(file: str) -> str:
     :param file: Шлях до текстового файлу, з якого потрібно прочитати текст.
     :return: Найкоротше слово, яке зустрічається найбільше разів.
     """
-    with open(file, 'r', encoding='utf-8') as file:
-        text = file.read()
+    with open(file, 'r', encoding='utf-8') as f:
+        text = f.read()
 
     words = text.split()
     normalized_words = [word.lower() for word in words]
@@ -19,19 +20,18 @@ def find_most_common_shortest_word(file: str) -> str:
     return shortest_word
 
 
-def replace_word_in_text(file, target_word: str) -> str:
+def replace_word_in_text(file: str, target_word: str) -> str:
     """
     Замінює всі входження цільового слова у текстовому файлі на його версію з великими літерами.
     :param file: Шлях до текстового файлу, в якому потрібно виконати заміну.
     :param target_word: Слово, яке потрібно замінити на його версію з великими літерами.
     :return: Модифікований текст, в якому всі входження цільового слова замінені на його версію з великими літерами.
     """
-
-    with open(file, 'r', encoding='utf-8') as file:
-        text = file.read()
+    with open(file, 'r', encoding='utf-8') as f:
+        text = f.read()
 
     upper_target_word = target_word.upper()
-    modified_text = text.replace(target_word, upper_target_word)
+    modified_text = re.sub(r'\b' + re.escape(target_word) + r'\b', upper_target_word, text)
     return modified_text
 
 
@@ -41,3 +41,4 @@ result_text = replace_word_in_text(file_path, most_common_shortest_word)
 print(most_common_shortest_word)
 print('----------------------------------------------------------------------')
 print(result_text)
+
