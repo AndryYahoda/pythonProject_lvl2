@@ -5,16 +5,16 @@ def compare_and_find_popular(filename: str) -> None:
     """
     Порівнює кількість голосних і приголосних у файлі та знаходить найпопулярніші символи.
     :param filename: Ім'я або шлях до файлу, який потрібно обробити.
-    :return: Результат функції виводиться на екран і записується у файл.
+    :return: Словник з кількістю голосних та приголосних.
     """
 
-    vowels = "AEIOUaeiouАЕЄИІЇОУЮЯаеєиіїоуюя"
-    consonants = "BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyzБВГҐДЖЗЙКЛМНОПРСТФХЦЧШЩбвгґджзйклмнопрстфхцчшщ"
+    vowels = "aeiouаеєиіїоуюя"
+    consonants = "bcdfghjklmnpqrstvwxyzбвгґджзйклмнопрстфхцчшщ"
     vowels_list = []
     consonants_list = []
 
     with open(filename, 'r', encoding='utf-8') as file:
-        text = file.read()
+        text = file.read().lower()
 
         for char in text:
             if char in vowels:

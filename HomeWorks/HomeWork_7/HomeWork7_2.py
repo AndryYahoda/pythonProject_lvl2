@@ -4,13 +4,13 @@ def count_vowels_consonants(filename: str) -> dict:
     :param filename: Ім'я або шлях до файлу, який потрібно обробити.
     :return: Словник з кількістю голосних та приголосних.
     """
-    vowels = "AEIOUaeiouАЕЄИІЇОУЮЯаеєиіїоуюя"
-    consonants = "BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyzБВГҐДЖЗЙКЛМНОПРСТФХЦЧШЩбвгґджзйклмнопрстфхцчшщ"
+    vowels = "aeiouаеєиіїоуюя"
+    consonants = "bcdfghjklmnpqrstvwxyzбвгґджзйклмнопрстфхцчшщ"
 
     result = {'vowels': 0, 'consonants': 0}
 
     with open(filename, 'r', encoding='utf-8') as file:
-        text = file.read()
+        text = file.read().lower()
 
     for char in text:
         if char in vowels:
@@ -23,4 +23,3 @@ def count_vowels_consonants(filename: str) -> dict:
 
 result = count_vowels_consonants('input_8.txt')
 print(result)
-
