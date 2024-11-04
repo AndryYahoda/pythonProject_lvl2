@@ -1,4 +1,5 @@
-from datetime import datetime, timedelta
+from datetime import datetime
+import re
 
 
 class Train:
@@ -9,9 +10,12 @@ class Train:
         :param train_number: The train number.
         :param departure_time: The departure time in 'YYYY-MM-DD HH:MM' format.
         """
-        self.destination = destination
-        self.train_number = train_number
-        self.departure_time = departure_time
+        self._destination = None
+        self._train_number = None
+        self._departure_time = None
+        self.set_destination(destination)
+        self.set_train_number(train_number)
+        self.set_departure_time(departure_time)
         self._validate_departure_time()
 
     def _validate_departure_time(self) -> None:
@@ -24,30 +28,40 @@ class Train:
         if departure_time_converted < current_time:
             raise ValueError("Час відправлення не може бути меншим за поточний.")
 
+    @property
+    def destination(self) -> str:
+        return self._destination
+
+    @property
+    def train_number(self) -> str:
+        return self._train_number
+
+    @property
+    def departure_time(self) -> str:
+        return self._departure_time
+
+    def set_destination(self, destination: str) -> None:
+        self._destination = destination
+
+    def set_train_number(self, train_number: str) -> None:
+        self._train_number = train_number
+
+    def set_departure_time(self, departure_time: str) -> None:
+        datetime_regex = r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$"
+        if re.match(datetime_regex, departure_time):
+            self._departure_time = departure_time
+        else:
+            raise ValueError("Incorrect format")
+
     def __str__(self) -> str:
-        """
-        Formats the string to display train information.
-        :return: A description of the train.
-        """
         return f"Потяг №{self.train_number} рухається до міста {self.destination}, відправлення: {self.departure_time}"
 
 
 def sort_trains_by_number(trains: list) -> list:
-    """
-    Sorts a list of Train objects by their train number.
-    :param trains: A list of Train objects.
-    :return: A sorted list of Train objects by train number.
-    """
     return sorted(trains, key=lambda train: train.train_number)
 
 
 def find_train_by_number(trains: list, number: str) -> list:
-    """
-    Finds a train by its number.
-    :param trains: A list of Train objects.
-    :param number: The train number to search for.
-    :return: A list of Train objects matching the train number, or a message if not found.
-    """
     result = [train for train in trains if train.train_number == number]
     return result if result else "Потяг із таким номером не знайдено."
 
@@ -72,3 +86,4 @@ if isinstance(found_trains, list):
         print(train)
 else:
     print(found_trains)
+
