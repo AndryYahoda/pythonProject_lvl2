@@ -10,12 +10,13 @@ class Train:
         :param train_number: The train number.
         :param departure_time: The departure time in 'YYYY-MM-DD HH:MM' format.
         """
-        self._destination = None
-        self._train_number = None
-        self._departure_time = None
-        self.set_destination(destination)
-        self.set_train_number(train_number)
-        self.set_departure_time(departure_time)
+        datetime_regex = r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$"
+        if not re.match(datetime_regex, departure_time):
+            raise ValueError("Incorrect format")
+
+        self._destination = destination
+        self._train_number = train_number
+        self._departure_time = departure_time
         self._validate_departure_time()
 
     def _validate_departure_time(self) -> None:
@@ -24,7 +25,7 @@ class Train:
         :raises ValueError: If the departure time is less than the current time.
         """
         current_time = datetime.now()
-        departure_time_converted = datetime.strptime(self.departure_time, "%Y-%m-%d %H:%M")
+        departure_time_converted = datetime.strptime(self._departure_time, "%Y-%m-%d %H:%M")
         if departure_time_converted < current_time:
             raise ValueError("Час відправлення не може бути меншим за поточний.")
 
@@ -39,19 +40,6 @@ class Train:
     @property
     def departure_time(self) -> str:
         return self._departure_time
-
-    def set_destination(self, destination: str) -> None:
-        self._destination = destination
-
-    def set_train_number(self, train_number: str) -> None:
-        self._train_number = train_number
-
-    def set_departure_time(self, departure_time: str) -> None:
-        datetime_regex = r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$"
-        if re.match(datetime_regex, departure_time):
-            self._departure_time = departure_time
-        else:
-            raise ValueError("Incorrect format")
 
     def __str__(self) -> str:
         return f"Потяг №{self.train_number} рухається до міста {self.destination}, відправлення: {self.departure_time}"
@@ -86,4 +74,3 @@ if isinstance(found_trains, list):
         print(train)
 else:
     print(found_trains)
-
