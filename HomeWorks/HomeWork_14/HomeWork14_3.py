@@ -18,6 +18,8 @@ class Train:
         self._train_number = train_number
         self._departure_time = departure_time
         self._validate_departure_time()
+        self._validate_train_number()
+        self._validate_destination()
 
     def _validate_departure_time(self) -> None:
         """
@@ -28,6 +30,30 @@ class Train:
         departure_time_converted = datetime.strptime(self._departure_time, "%Y-%m-%d %H:%M")
         if departure_time_converted < current_time:
             raise ValueError("Час відправлення не може бути меншим за поточний.")
+
+    def _validate_train_number(self):
+        """
+        Validates the train number.
+        :param self._train_number: The train number to be validated.
+        :raises ValueError: If the train number is not in the correct format or out of the range.
+        """
+
+        if not re.fullmatch(r'\d{1,3}', self._train_number) or not (1 <= int(self._train_number) <= 999):
+            raise ValueError("Номер поїзда має бути числом від 001 до 999.")
+        if len(self._train_number) != 3:
+            raise ValueError("Номер поїзда має бути у форматі трьох цифр, наприклад 001, 099 або 345.")
+
+    def _validate_destination(self):
+        """
+        Validates the destination of the train.
+        :param self._destination: The destination of the train.
+        :raises ValueError: If the destination is empty, contains invalid characters, or exceeds 30 characters.
+        """
+
+        if not self._destination.strip():
+            raise ValueError("Destination cannot be empty.")
+        if len(self._destination) > 30 or not all(char.isalpha() or char == '-' for char in self._destination):
+            raise ValueError("Destination can only contain letters and hyphens, up to 30 characters.")
 
     @property
     def destination(self) -> str:
