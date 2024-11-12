@@ -41,6 +41,10 @@ class Calculator:
             self.history[f"sqrt({a})"] = result
         elif operation == "factorial":
             result = factorial(a)
+            self.history[f"{a}!"] = result
+        else:
+            raise ValueError("Невірна операція")
+
         return result
 
 
