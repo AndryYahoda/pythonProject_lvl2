@@ -29,3 +29,5 @@ newest_invoice = cursor.fetchone()
 print("\nЗапис із найсвіжішою датою з таблиці Invoice:", newest_invoice)
 
 conn.close()
+
+# Також добавив для коміту
