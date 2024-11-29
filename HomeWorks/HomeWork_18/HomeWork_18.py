@@ -40,3 +40,5 @@ except sqlite3.Error as e:
     print(f"Помилка: {e}")
 
 conn.close()
+
+# добавив для коміту
