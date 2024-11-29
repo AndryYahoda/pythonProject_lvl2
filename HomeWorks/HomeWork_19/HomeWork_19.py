@@ -20,19 +20,11 @@ print("\nЗаписи з таблиці Invoice для міста Paris:")
 for invoice in invoices_paris:
     print(invoice)
 
-cursor.execute("""
-    SELECT * 
-    FROM Invoice
-    WHERE InvoiceDate = (SELECT MIN(InvoiceDate) FROM Invoice);
-""")
+cursor.execute("SELECT MIN(InvoiceDate) AS OldestDate, * FROM Invoice;")
 oldest_invoice = cursor.fetchone()
 print("\nЗапис із найстарішою датою з таблиці Invoice:", oldest_invoice)
 
-cursor.execute("""
-    SELECT * 
-    FROM Invoice
-    WHERE InvoiceDate = (SELECT MAX(InvoiceDate) FROM Invoice);
-""")
+cursor.execute("SELECT MAX(InvoiceDate) AS NewestDate, * FROM Invoice;")
 newest_invoice = cursor.fetchone()
 print("\nЗапис із найсвіжішою датою з таблиці Invoice:", newest_invoice)
 
