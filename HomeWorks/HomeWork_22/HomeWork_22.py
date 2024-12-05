@@ -42,3 +42,5 @@ new_potion = potio_piperis.mix(potio_developing)
 
 print("New potion color:", new_potion.color)
 print("New potion volume:", new_potion.volume)
+
+# Для коміту
