@@ -4,23 +4,38 @@ db = SqliteDatabase('store.db')
 
 
 class BaseModel(Model):
+    """Базовий клас для моделей, що зберігаються в базі даних."""
     class Meta:
+        """Налаштування для бази даних."""
         database = db
 
 
 class Buyer(BaseModel):
+    """
+    Клас, який представляє покупця в системі.
+    Включає інформацію про покупця: ім'я та електронну пошту.
+    """
     id = AutoField(primary_key=True)
     name = CharField()
     email = CharField(unique=True)
 
 
 class Seller(BaseModel):
+    """
+    Клас, який представляє продавця в системі.
+    Містить інформацію про продавця, зокрема його ім'я та контактні дані.
+    """
     id = AutoField(primary_key=True)
     name = CharField()
     contact = CharField()
 
 
+
 class Product(BaseModel):
+    """
+    Клас, який представляє товар у системі.
+    Містить інформацію про товар: назву, ціну, дату виробництва та продавця.
+    """
     id = AutoField(primary_key=True)
     name = CharField()
     price = DecimalField(max_digits=10, decimal_places=2)
@@ -28,11 +43,17 @@ class Product(BaseModel):
     seller = ForeignKeyField(Seller, backref='products')
 
 
+
 class Purchase(BaseModel):
+    """
+    Клас, який представляє покупку товару покупцем.
+    Містить інформацію про покупця, товар та кількість придбаних одиниць.
+    """
     id = AutoField(primary_key=True)
     buyer = ForeignKeyField(Buyer, backref='purchases')
     product = ForeignKeyField(Product, backref='purchases')
     quantity = IntegerField()
+
 
 
 db.connect()
